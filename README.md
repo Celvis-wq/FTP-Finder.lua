@@ -1,4 +1,4 @@
-# FTP Finder.lua
+# FTPFinder.lua
 # Version: 0.0.1
 
 ## Purpose:
