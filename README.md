@@ -18,8 +18,8 @@
 - ./FTPFinder
 
 # Languages used:
-- Java
-[<img align="left" alt="Java" width="26px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Lua-Logo.svg/600px-Lua-Logo.svg.png?20150107024942" style="padding-right:10px;" />]
+- Lua
+[<img align="left" alt="" width="26px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Lua-Logo.svg/600px-Lua-Logo.svg.png?20150107024942" style="padding-right:10px;" />]
 
 <br />
 <br />
