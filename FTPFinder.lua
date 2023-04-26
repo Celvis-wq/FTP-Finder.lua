@@ -1,8 +1,7 @@
 -- FTP Finder.lua
 --[[
-    Version: 0.0.1
+    Version: 0.0.2
     Created by: Celvis#5477
-    Git: https://github.com/Celvis-wq/FTP-Finder.lua
 ]]
 
 -- Import required modules
@@ -16,10 +15,7 @@ function isPortOpen(ip, port)
     local result, errorMsg = sock:connect(ip, port)
     sock:close()
 
-    if not result then
-        return false
-    end
-    return true
+    return result ~= nil
 end
 
 -- Function to load ports from the URL
@@ -28,12 +24,11 @@ function loadFtpPorts(url)
     if statusCode ~= 200 then
         error("Failed to load ports from URL. HTTP status code: " .. tostring(statusCode))
     end
-
+    
     local ports = {}
     for port in string.gmatch(response, "%d+") do
         table.insert(ports, tonumber(port))
-    end
-
+end
     return ports
 end
 
@@ -46,7 +41,6 @@ function scanFtpPorts(ip, ftpPorts)
             table.insert(openPorts, port)
         end
     end
-
     return openPorts
 end
 
@@ -55,12 +49,12 @@ local function main()
     print("Enter the target IP address:")
     local ip = io.read()
 
-    local ports = "https://raw.githubusercontent.com/Celvis-wq/ports/main/ports.txt"
-    local ftpPorts = loadFtpPorts(ports)
-
+    local portsUrl = "https://raw.githubusercontent.com/Celvis-wq/ports/main/ports.txt"
+    local ftpPorts = loadFtpPorts(portsUrl)
+    
     print("Scanning FTP ports on " .. ip)
     local openPorts = scanFtpPorts(ip, ftpPorts)
-
+    
     if #openPorts == 0 then
         print("No open FTP ports found.")
     else
