@@ -1,5 +1,5 @@
 # FTPFinder.lua
-# Version: 0.0.1
+# Version: 0.0.2
 
 ## Purpose:
 
@@ -28,10 +28,14 @@
 
 ### Changelog:
 Changes:
-1. Nothing so far!
+1. Renamed some variables
+2. Changed all global functions to local functions (Local functions are faster and prevent unintended access from outside the module)
+3. Removed the unused errorMsg variable from the isPortOpen function (The variable was not being used, so it is better to use an underscore (_) to discard it)
+4. Changed the return statement in the isPortOpen function (Simplified the return statement by returning the result of the comparison directly)
+5. Changed the variable name 'ports' to 'portsUrl' in the main function (I just decided that portsUrl is more descriptive)
 
 TODO:
-1. Nothing so far!
+1. Improve something idk. its fine how it is as of right now.
 
 
 
