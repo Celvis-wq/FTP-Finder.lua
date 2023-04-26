@@ -28,7 +28,7 @@
 
 ### Changelog:
 Changes:
-1. Renamed some variables
+1. Renamed some variables (Had to to be more descriptive)
 2. Changed all global functions to local functions (Local functions are faster and prevent unintended access from outside the module)
 3. Removed the unused errorMsg variable from the isPortOpen function (The variable was not being used, so it is better to use an underscore (_) to discard it)
 4. Changed the return statement in the isPortOpen function (Simplified the return statement by returning the result of the comparison directly)
