@@ -1,25 +1,31 @@
 -- FTP Finder.lua
 --[[
-    Version: 0.0.2
+    Version: 0.0.3
     Created by: Celvis#5477
 ]]
 
--- Import required modules
 local socket = require("socket")
 local http = require("socket.http")
 
--- Function to check if a port is open
-function isPortOpen(ip, port)
-    local sock = socket.tcp()
-    sock:settimeout(1) -- Timeout (Seconds)
-    local result, errorMsg = sock:connect(ip, port)
-    sock:close()
+-- Cache DNS resolution
+local ip = io.read()
+local ipInfo = socket.dns.getaddrinfo(ip)
+local resolvedIp = ipInfo[1].addr
 
+-- Increase timeout
+local timeout = 5
+
+-- Function to check if a port is open
+local function isPortOpen(port)
+    local sock = socket.tcp()
+    sock:settimeout(timeout)
+    local result, errorMsg = sock:connect(resolvedIp, port)
+    sock:close()
     return result ~= nil
 end
 
 -- Function to load ports from the URL
-function loadFtpPorts(url)
+local function loadFtpPorts(url)
     local response, statusCode = http.request(url)
     if statusCode ~= 200 then
         error("Failed to load ports from URL. HTTP status code: " .. tostring(statusCode))
@@ -28,16 +34,16 @@ function loadFtpPorts(url)
     local ports = {}
     for port in string.gmatch(response, "%d+") do
         table.insert(ports, tonumber(port))
-end
+    end
     return ports
 end
 
 -- Function to scan ports
-function scanFtpPorts(ip, ftpPorts)
+local function scanFtpPorts(ftpPorts)
     local openPorts = {}
 
     for _, port in ipairs(ftpPorts) do
-        if isPortOpen(ip, port) then
+        if isPortOpen(port) then
             table.insert(openPorts, port)
         end
     end
@@ -46,14 +52,11 @@ end
 
 -- Main
 local function main()
-    print("Enter the target IP address:")
-    local ip = io.read()
-
     local portsUrl = "https://raw.githubusercontent.com/Celvis-wq/ports/main/ports.txt"
     local ftpPorts = loadFtpPorts(portsUrl)
     
     print("Scanning FTP ports on " .. ip)
-    local openPorts = scanFtpPorts(ip, ftpPorts)
+    local openPorts = scanFtpPorts(ftpPorts)
     
     if #openPorts == 0 then
         print("No open FTP ports found.")
