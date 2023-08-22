@@ -1,5 +1,5 @@
 # FTPFinder.lua
-# Version: 0.0.2
+# Version: 0.0.3
 
 ## Purpose:
 
@@ -28,11 +28,11 @@
 
 ### Changelog:
 Changes:
-1. Renamed some variables (Had to to be more descriptive)
-2. Changed all global functions to local functions (Local functions are faster and prevent unintended access from outside the module)
-3. Removed the unused errorMsg variable from the isPortOpen function (The variable was not being used, so it is better to use an underscore (_) to discard it)
-4. Changed the return statement in the isPortOpen function (Simplified the return statement by returning the result of the comparison directly)
-5. Changed the variable name 'ports' to 'portsUrl' in the main function (I just decided that portsUrl is more descriptive)
+1. Added Cached DNS Resolution (I cached the DNS resolution result to avoid repeated DNS lookups for the same IP address)
+2. Increased Timeout. (I increased the timeout value to 5 seconds to provide more time for each connection attempt)
+3. Localized multiple functions. (I specifically localized isPortOpen, loadFtpPorts, and scanFtpPorts functions to avoid repeated table lookups)
+4. Optimized string concatenation. (I didn't change the string concatenation directly, but by localizing the functions and variables, there are fewer table lookups, which can help optimize string concatenation implicitly, pretty useful)
+5. Optimized the main function. (I used the previously defined resolvedIp and timeout variables, nothing crazy)
 
 TODO:
-1. Improve something idk. its fine how it is as of right now.
+1. Nothing at this current time.
