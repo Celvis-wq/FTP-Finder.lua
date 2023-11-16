@@ -1,5 +1,6 @@
 # FTPFinder.lua
-# Version: 0.0.3
+# Version: 0.0.4
+- By: Celvis
 
 ## Purpose:
 
@@ -28,11 +29,12 @@
 
 ### Changelog:
 Changes:
-1. Added Cached DNS Resolution (I cached the DNS resolution result to avoid repeated DNS lookups for the same IP address)
-2. Increased Timeout. (I increased the timeout value to 5 seconds to provide more time for each connection attempt)
-3. Localized multiple functions. (I specifically localized isPortOpen, loadFtpPorts, and scanFtpPorts functions to avoid repeated table lookups)
-4. Optimized string concatenation. (I didn't change the string concatenation directly, but by localizing the functions and variables, there are fewer table lookups, which can help optimize string concatenation implicitly, pretty useful)
-5. Optimized the main function. (I used the previously defined resolvedIp and timeout variables, nothing crazy)
+1. Added a check (Error Handling) for successful DNS resolution to prevent runtime errors.
+2. Added a check for the successful closure of socket connections.
+3. Added a basic check for valid IP address input to prevent unexpected script behavior. It will now identify invalid IP addresses
+4. I set the URL and timeout as constants for easier modification (Parameterizing any and all constants).
+5. I improved error messages and all, included the URL in the error message for better context when an error occurs.
+6. Updated overall performance, things should run smoother now.
 
 TODO:
 1. Nothing at this current time.
